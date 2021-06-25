@@ -10,7 +10,7 @@ export default function Home() {
             <Logo/>
             <LoginForm/>
             <FormsButton text='Entrar'/>
-            <Link to='/sign-up'>
+            <Link to='/sign-up' style={{ textDecoration: 'none'}}>
                 <SignUpShortcut>
                     Primeira vez? Cadastre-se!
                 </SignUpShortcut>
