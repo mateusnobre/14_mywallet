@@ -40,7 +40,7 @@ app.post("/login", async (req, res) => {
           VALUES ($1, $2, NOW())
         `, [user.id, token]);
 
-        res.status(400).send(token);
+        res.status(400).send('asas');
     } else {
         res.sendStatus(400);
     }

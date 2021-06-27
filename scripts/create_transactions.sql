@@ -1,5 +1,5 @@
 CREATE TABLE transactions (
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     client_id INTEGER,
     "value" FLOAT,
     comment TEXT,
