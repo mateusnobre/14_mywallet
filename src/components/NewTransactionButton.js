@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import { BsPlusCircle } from 'react-icons/bs'
-import { FiMinusCircle } from 'react-icons/fi'
+import { HiOutlineMinusCircle, HiOutlinePlusCircle } from 'react-icons/hi'
 
 export default function NewTransactionButton(props){
     if (props.text === 'entrada'){
         return(
             <NewTransactionButtonBox>
-                <BsPlusCircle color='white' size='22px'/>
+                <HiOutlinePlusCircle color='white' size='30px'/>
                 <Text>
                     <Text>Nova</Text>
                     <Text>{props.text}</Text>
@@ -17,7 +16,7 @@ export default function NewTransactionButton(props){
     else if (props.text === 'saída'){
         return(
             <NewTransactionButtonBox>
-                <FiMinusCircle color='white' size='22px'/>
+                <HiOutlineMinusCircle color='white' size='30px'/>
                 <Text>
                     <Text>Nova</Text>
                     <Text>{props.text}</Text>
