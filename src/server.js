@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import Joi from 'joi';
 import pg from 'pg';
+import { v4 as uuid } from 'uuid';
 
 const { Pool } = pg;
 
@@ -49,6 +50,14 @@ app.post("/sign-in", async (req, res) => {
 
     if(user && bcrypt.compareSync(password, user.password)) {
         // sucesso, usuário encontrado com este email e senha!
+        const token = uuid.v4();
+        
+        await connection.query(`
+          INSERT INTO sessions ("userId", token, created_at)
+          VALUES ($1, $2, NOW())
+        `, [user.id, token]);
+
+        res.send(token);
     } else {
         // usuário não encontrado (email ou senha incorretos)
     }
