@@ -18,7 +18,7 @@ app.post("/sign-up", async (req, res) => {
         VALUES ($1, $2, $3)
     `,[name, email, passwordHash]);
 
-    res.sendStatus(400);
+    res.sendStatus(402);
 });
 
 app.post("/login", async (req, res) => {
@@ -40,9 +40,9 @@ app.post("/login", async (req, res) => {
           VALUES ($1, $2, NOW())
         `, [user.id, token]);
 
-        res.status(400).send('asas');
+        res.status(440).send('asas');
     } else {
-        res.sendStatus(400);
+        res.sendStatus(440);
     }
 });
 

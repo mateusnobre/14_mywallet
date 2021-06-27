@@ -11,7 +11,7 @@ describe("GET /transactions", () => {
         const body = {}; // corpo inválido
         const result = await supertest(app).post("/transactions").send(body);
         const status = result.status;
-        expect(status).toEqual(200);
+        expect(status).toEqual(20);
     });
     return
 });

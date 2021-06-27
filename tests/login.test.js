@@ -31,16 +31,16 @@ describe("POST /login", () => {
         expect(status).toEqual(201);
         expect(isValidToken.rows.length).toEqual(1);
     });
-    it("returns 404 and no data for email not found", async () => {
+    it("returns 401 and no data for email not found", async () => {
         const body = {email: 'somerandomemail@somerandomdomain.com', password: 'random'}; 
         const result = await supertest(app).post("/clients").send(body);
-        expect(result.status).toEqual(404);
+        expect(result.status).toEqual(401);
         expect(result.data).toEqual(undefined);
     });
-    it("returns 401 and no data for wrong password", async () => {
+    it("returns 403 and no data for wrong password", async () => {
         const body = {email: testUser.email, password: 'random'}; 
         const result = await supertest(app).post("/clients").send(body);
-        expect(result.status).toEqual(401);
+        expect(result.status).toEqual(403);
         expect(result.data).toEqual(undefined);
     });
     it("returns 400 and no data for empty params", async () => {
