@@ -15,6 +15,7 @@ export default function Input(props){
 }
 
 const InputBox = styled.div`
+    margin-bottom: 13px;
     input {
         width: 326px;
         height: 58px;

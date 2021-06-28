@@ -16,14 +16,15 @@ const instance = axios.create({
 });
 
 for (const method of methods) {
-  axiosWrapper[method] = async function (route, body, query = {}, complete = false) {
+  axiosWrapper[method] = async function (route, body, query = {}, config, complete = false) {
     try {
       const url = `${route}${queryStringBuilder(query)}`;
 
       const request = await instance({
         method,
         url,
-        data: body
+        data: body,
+        header: config
       });
 
       return complete ? request : request.data;

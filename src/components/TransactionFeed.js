@@ -1,7 +1,20 @@
 import styled from 'styled-components'
 import Transaction from './Transaction'
+import * as api from '../services/api/transactions'
+import { useState, useEffect } from "react";
+import TokenContext  from '../contexts/TokenContext';
 
 export default function TransactionFeed(){
+    const [transactions, setTransactions] = useState(null);
+    useEffect(() => {
+      api.list().then(transactions => {
+        setTransactions(transactions.map(t => ({ value: t.value, description: t.description, date: t.created_at })));
+      }).catch(err => {
+        alert('Não foi possível obter as transações do usuário');
+      })
+    }, []);
+
+
     return(
         <TransactionFeedBox>
             <Transaction value={213} description='Compra com a mamãe'  date='21/05'/>
