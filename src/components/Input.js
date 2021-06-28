@@ -1,16 +1,15 @@
 import styled from "styled-components"
 
-import React, { useState } from "react";
+import React from "react";
 
 export default function Input(props){
-    const [input, setInput] = useState("");
     return(
     <InputBox>
         <input
           type={props.type}
           placeholder={props.placeholder}
-          onChange={(e) => setInput(e.target.value)}
-          value={input}
+          onChange={(e) => props.setInput(e.target.value)}
+          value={props.input}
         ></input>
     </InputBox>)
 }
