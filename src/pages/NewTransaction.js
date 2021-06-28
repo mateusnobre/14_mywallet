@@ -19,7 +19,6 @@ export default function NewTransaction(){
         }
     }
     function postTransaction(event){
-        console.log(412)
         if (!value || !comment) {
           alert("Prencha os campos");
         }

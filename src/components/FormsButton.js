@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export default function FormsButton(props){
     return(
         <FormsButtonBox>
-            <button type='submit'>
+            <button type="submit">
                 {props.text}
             </button>
         </FormsButtonBox>

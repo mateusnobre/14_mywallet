@@ -1,31 +1,41 @@
 import styled from 'styled-components'
 import Transaction from './Transaction'
-import * as api from '../services/api/transactions'
 import { useState, useEffect } from "react";
+import axios from 'axios';
+import dayjs from 'dayjs'
+
+const token = localStorage.getItem("token");
+const config = {
+  headers: {
+    authorization: `Bearer ${token}`,
+  },
+};
 
 export default function TransactionFeed(){
     const [transactions, setTransactions] = useState([]);
-    useEffect(() => {
-      api.list().then(transactions => {
-        setTransactions(transactions.map(t => ({ value: t.value, description: t.description, date: t.created_at })));
-      }).catch(err => {
-      })
-    }, []);
+    function loadTransactions () {
+        const response = axios.get('http://localhost:4000/transactions', config);
+        response.then( (res) => {
+            setTransactions([...res.data])
+        })
+    }
+    
+    useEffect(loadTransactions, [transactions]);
 
     function getSum(total, num) {
-      return total + Math.round(100*num)/100;
+      return total + num.toFixed(2);
     }
     return(
         <TransactionFeedBox>
             {transactions.map((t) => (
               <Transaction
-                value={t.value}
-                description={t.value}
-                date={t.date}
+                value={t.value.toFixed(2)}
+                description={t.comment}
+                date={dayjs(t.created_at).format('DD/MM')}
               />
             ))}
             <Text>SALDO</Text>
-            <Funds>R$ {transactions.map((t) => (t.value)).reduce(getSum, 0)} </Funds>
+            <Funds sum={transactions.map((t) => (t.value)).reduce(getSum, 0)}>R$ {transactions.map((t) => (t.value)).reduce(getSum, 0)} </Funds>
         </TransactionFeedBox>
     )
 }
@@ -44,6 +54,7 @@ const TransactionFeedBox = styled.div`
     width: 87%;
     height: 63vh;
     border-radius: 5px;
+    overflow-y: scroll;
 `
 const Text = styled.div`
     position: absolute;
@@ -57,7 +68,7 @@ const Text = styled.div`
 
 const Funds = styled.div`
     position: absolute;
-    color: green;
+    color: ${props => props.value < 0 ? '#03AC00' : '#C70000'};
     font-size: 17px;
     font-weight: 400;
     line-height: 20px;

@@ -7,9 +7,9 @@ const config = {
   },
 };
 
-export async function list () {
-  const response = await axios.get('http://localhost:4000/transactions', config);
-  return response;
+export function list () {
+  const response = axios.get('http://localhost:4000/transactions', config);
+  return response.data;
 }
 
 export async function makeTransaction (value, comment) {
@@ -17,7 +17,6 @@ export async function makeTransaction (value, comment) {
     value,
     comment
   }, config);
-  console.log(response)
   if (response.status === 201){
     return true
   }

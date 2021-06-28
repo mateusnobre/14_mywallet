@@ -2,8 +2,15 @@ import Input from './Input'
 import FormsButton from '../components/FormsButton'
 import styled from 'styled-components'
 import { useState } from 'react'
-import Login from   '../services/api/login'
+import axios from 'axios';
 import { useHistory } from 'react-router-dom'
+
+const token = localStorage.getItem("token");
+const config = {
+  headers: {
+    authorization: `Bearer ${token}`,
+  },
+};
 
 export default function LoginForm(){
     const [email, setEmail] = useState("");
@@ -16,14 +23,19 @@ export default function LoginForm(){
           alert("Prencha os campos");
         }
         else {
-            const loginResult = Login(email, password)
-            if (loginResult) {
-                history.push('/');
-            }
-            else {
+            axios.post('http://localhost:4000/login', {
+                email: email,
+                password: password
+            }, config)
+            .then((res) => {
+                if (res.status === 201){
+                    localStorage.setItem('token', res.data.token);
+                    localStorage.setItem('user', JSON.stringify(res.data.name));
+                    history.push('/');
+                }})
+            .catch (() => {
                 alert("E-mail ou senha incorretos")
-            
-            }
+            })
         }
     }
     return(

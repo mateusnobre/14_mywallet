@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { IoExitOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react';
-
 
 export default function Header(){
     var username = JSON.parse(localStorage.getItem("user"));
@@ -10,9 +8,6 @@ export default function Header(){
         localStorage.removeItem("user");
         localStorage.removeItem("token");
     }
-    useEffect(() => {
-        username = JSON.parse(localStorage.getItem("user"));
-	}, JSON.parse(localStorage.getItem("user")));
     return(
         <HeaderBox>
             <WelcomeText>Olá, {username}</WelcomeText>        

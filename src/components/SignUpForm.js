@@ -2,8 +2,9 @@ import { useState } from 'react'
 import Input from './Input'
 import styled from 'styled-components'
 import FormsButton from '../components/FormsButton'
-import signUp from   '../services/api/sign-up'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
+
 
 export default function SignUpForm(){
     const [name, setName] = useState("");
@@ -13,7 +14,7 @@ export default function SignUpForm(){
     const history = useHistory();
 
     function trySignUp(event){
-        event.preventDefault();        
+        event.preventDefault();
         if (!email || !password || !passwordCheck || !name) {
           alert("Prencha os campos");
         }
@@ -22,8 +23,16 @@ export default function SignUpForm(){
                 alert('As senhas não são iguais')
             }
             else {
-                signUp(name, email, password)
-                history.push('/login');
+                const response =  axios.post('http://localhost:4000/sign-up', {
+                name: name,
+                email: email,
+                password: password
+                })
+                .then(() => {
+                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('user', JSON.stringify(response.name));
+                    history.push('/login');
+                })
             }
         }
     }
