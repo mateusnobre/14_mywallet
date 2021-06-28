@@ -1,6 +1,5 @@
 import NewTransactionButton from './NewTransactionButton'
 import styled from 'styled-components'
-
 export default function Bottom(){
     return(
         <BottomBox>

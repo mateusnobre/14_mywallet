@@ -24,7 +24,7 @@ for (const method of methods) {
         method,
         url,
         data: body,
-        header: config
+        headers: [config]
       });
 
       return complete ? request : request.data;

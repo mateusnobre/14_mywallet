@@ -7,7 +7,7 @@ export default function Transaction(props){
                 <Date>{props.date}</Date>
                 <Description>{props.description}</Description>
             </AuxBox>
-            <Value value={props.value}>{props.value}</Value>
+            <Value value={props.value}>R$ {props.value}</Value>
         </TransactionBox>
     )
 }

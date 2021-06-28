@@ -2,7 +2,6 @@ import Logo from '../components/Logo'
 import styled from 'styled-components'
 import LoginForm from '../components/LoginForm'
 import { Link } from "react-router-dom";
-import React from "react";
 
 export default function Login() {
     return(

@@ -1,11 +1,22 @@
 import styled from 'styled-components'
 import { IoExitOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom'
-export default function Header(props){
+import { useEffect } from 'react';
+
+
+export default function Header(){
+    var username = JSON.parse(localStorage.getItem("user"));
+    function clearUserData (){
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+    }
+    useEffect(() => {
+        username = JSON.parse(localStorage.getItem("user"));
+	}, JSON.parse(localStorage.getItem("user")));
     return(
         <HeaderBox>
-            <WelcomeText>Olá, Fulano</WelcomeText>        
-            <Link to ='/login' style={{textDecoration: 'none'}}><IoExitOutline color='white'size='24px'/></Link>
+            <WelcomeText>Olá, {username}</WelcomeText>        
+            <Link to ='/login' onClick={clearUserData} style={{textDecoration: 'none'}}><IoExitOutline color='white'size='24px'/></Link>
         </HeaderBox>
         )
 }

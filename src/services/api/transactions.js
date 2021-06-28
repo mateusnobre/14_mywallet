@@ -1,12 +1,27 @@
-import api from './api';
+import axios from 'axios';
 
-export function list (config) {
-  return api.get(`/transactions`, config);
+const token = localStorage.getItem("token");
+const config = {
+  headers: {
+    authorization: `Bearer ${token}`,
+  },
+};
+
+export async function list () {
+  const response = await axios.get('http://localhost:4000/transactions', config);
+  return response;
 }
 
-export function makeTransaction (value, comment, config) {
-  return api.post('/transactions', {
+export async function makeTransaction (value, comment) {
+  const response = await axios.post('http://localhost:4000/transactions', {
     value,
     comment
   }, config);
+  console.log(response)
+  if (response.status === 201){
+    return true
+  }
+  else {
+    return false
+  }
 }

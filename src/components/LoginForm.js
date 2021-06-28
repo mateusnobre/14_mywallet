@@ -2,7 +2,7 @@ import Input from './Input'
 import FormsButton from '../components/FormsButton'
 import styled from 'styled-components'
 import { useState } from 'react'
-import login from   '../services/api/login'
+import Login from   '../services/api/login'
 import { useHistory } from 'react-router-dom'
 
 export default function LoginForm(){
@@ -10,14 +10,13 @@ export default function LoginForm(){
     const [password, setPassword] = useState("");
     const history = useHistory();
 
-
     function tryLogin(event){
         event.preventDefault();        
         if (!email || !password) {
           alert("Prencha os campos");
         }
         else {
-            const loginResult = login(email, password)
+            const loginResult = Login(email, password)
             if (loginResult) {
                 history.push('/');
             }
