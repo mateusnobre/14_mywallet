@@ -21,4 +21,5 @@ const WelcomeText = styled.div`
     color: white;
     font-weight: 700;
     font-size: 26px;
+    user-select: none;
 `

@@ -40,6 +40,7 @@ const NewTransactionButtonBox = styled.div`
 `
 
 const Text = styled.div`
+    user-select: none;
     color: white;
     font-size: 17px;
     line-height: 20px;

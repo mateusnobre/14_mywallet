@@ -8,6 +8,7 @@ import {
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import NewTransaction from './pages/NewTransaction';
 
 import './assets/styles/reset.css';
 import './assets/styles/style.css';
@@ -27,6 +28,9 @@ export default function App () {
           </Route>
           <Route path="/sign-up" exact>
             <SignUp />
+          </Route>
+          <Route path="/new-transaction/:value">
+            <NewTransaction />
           </Route>
         </Switch>
     </Router>
