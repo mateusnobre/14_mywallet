@@ -1,10 +1,15 @@
 import api from './api';
 
-export function login (email, password) {
-  const response =  api.post('/login', {
+export default async function login (email, password) {
+  const response =  await api.post('/login', {
     email,
     password
   });
-  localStorage.setItem('token', response.data.token);
-  localStorage.setItem('user', JSON.stringify(response.data.user));
+  console.log(response)
+  if (response.token && response.name){
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('user', JSON.stringify(response.name));
+    return true;
+  }
+  return false;
 }

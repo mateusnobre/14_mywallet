@@ -10,7 +10,6 @@ export default function TransactionFeed(){
       api.list().then(transactions => {
         setTransactions(transactions.map(t => ({ value: t.value, description: t.description, date: t.created_at })));
       }).catch(err => {
-        alert('Não foi possível obter as transações do usuário');
       })
     }, []);
 
