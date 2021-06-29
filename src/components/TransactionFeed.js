@@ -23,7 +23,7 @@ export default function TransactionFeed(){
     useEffect(loadTransactions, [transactions]);
 
     function getSum(total, num) {
-      return total + num.toFixed(2);
+      return total + num;
     }
     return(
         <TransactionFeedBox>
@@ -35,7 +35,7 @@ export default function TransactionFeed(){
               />
             ))}
             <Text>SALDO</Text>
-            <Funds sum={transactions.map((t) => (t.value)).reduce(getSum, 0)}>R$ {transactions.map((t) => (t.value)).reduce(getSum, 0)} </Funds>
+            <Funds sum={transactions.map((t) => (t.value)).reduce(getSum, 0)}>R$ {transactions.map((t) => (t.value)).reduce(getSum, 0).toFixed(2)} </Funds>
         </TransactionFeedBox>
     )
 }
